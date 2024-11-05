@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Captación Pluvial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Sistema de Recolección de Agua Pluvial</h1>
+    <div class="text-center mb-4">
+        <img src="imagenes/Mapa.jpeg" alt="Sistema de Recolección de Agua Pluvial" class="img-fluid" style="max-width: 100%; height: auto;">
+    </div>
+    
+
+    <!-- Formulario de entrada de datos -->
+    <form id="rainHarvestForm">
+        <div class="mb-3">
+            <label for="ubicacion" class="form-label">Código Postal:</label>
+            <input type="text" id="ubicacion" class="form-control" placeholder="Ingrese su código postal" maxlength="5" required>
+            <small class="form-text">Ingrese el código postal de su localidad (5 dígitos).</small>
+        </div>
+        <button type="button" onclick="siguiente()" class="btn btn-primary">Siguiente</button>
+    </form>
+
+    <div id="mensajeError" class="text-danger" style="display:none;"></div>
+</div>
+
+<!-- JavaScript -->
+<script src="js/index.js"></script>
+</body>
+</html>

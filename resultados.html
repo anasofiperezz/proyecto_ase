@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Resultados de Captación Pluvial</h1>
+        
+        <div class="alert alert-info p-4 rounded shadow-sm">
+            <p><strong>Código Postal:</strong> <span id="codigoPostal"></span></p>
+            <p><strong>Estacion:</strong> <span id="zona"></span></p>
+            <p><strong>Área de Captación:</strong> <span id="areaCaptacion"></span> m²</p>
+            <p><strong>Número de Niveles:</strong> <span id="niveles"></span></p>
+        </div>        
+
+        <div class="alert alert-secondary p-4 rounded shadow-sm">
+            <p><strong>Precipitación Anual:</strong> <span id="precipAnual"></span></p>
+            <p><strong>Capacidad del Tanque:</strong> <span id="capacidadTanque"></span></p>
+            <p><strong>Material Recomendado para el Tanque:</strong> <span id="materialTanque"></span></p>
+            <p><strong>Tubería Recomendada:</strong> <span id="tuberiaRecomendada"></span></p>
+            <p><strong>Cantidad de Tubería:</strong> <span id="cantidadTuberia"></span></p>
+            <p><strong>Cantidad Filtro:</strong> <span id="cantidadFiltro"></span></p>
+            <p><strong>Reductor de Turbulencia:</strong> <span id="reductor"></span></p>
+            <p><strong>Cantidad Codos:</strong> <span id="obtenerCodos"></span></p>
+            <p><strong>Precio del Tanque:</strong> <span id="precioTanque"></span></p>
+            <p><strong>Precio Total de la Tubería:</strong> <span id="precioTuberia"></span></p>
+        </div>
+
+        <a href="index.html" class="btn btn-primary mt-3">Volver al Inicio</a>
+    </div>
+
+    <script src="js/resultados.js"></script> <!-- Archivo de JavaScript externo -->
+</body>
+</html>
