@@ -93,9 +93,22 @@ function obtenerTinaco(litros) {
     if (litros >= 601 && litros <= 800) return 750;
     if (litros >= 801 && litros <= 1150) return 1100;
     if (litros >= 1151 && litros <= 2100) return 1200;
-    if (litros >= 2101 && litros <= 3800) return 1200;
-    if (litros >= 3801) return 2500;
-    return "Altura del tinaco no disponible";
+    if (litros >= 2101 && litros <= 3800) return 2500;
+    if (litros >= 3801) return 5000;
+    return "Capacidad de tinaco no disponible";
+}
+
+// Función para obtener los litros de agua a la semana con dos decimales
+function obtenerLitros(zona, areaCaptacion) {
+    zona = Math.round(zona);
+    let litrosSemanales;
+
+    if (zona === 21248) litrosSemanales = (0.009592723 * areaCaptacion * 1000 * 7);
+    else if (zona === 21035) litrosSemanales = (0.008294636 * areaCaptacion * 1000 * 7);
+    else if (zona === 21065) litrosSemanales = (0.008121421 * areaCaptacion * 1000 * 7);
+    else return "Litros semanales no disponibles";
+    
+    return parseFloat(litrosSemanales.toFixed(2));
 }
 
 // Obtener los resultados almacenados en localStorage
@@ -107,18 +120,17 @@ if (resultados) {
     document.getElementById("areaCaptacion").innerText = resultados.areaCaptacion;
     document.getElementById("niveles").innerText = resultados.niveles;
 
-    const precipSem = 850;
     const metrosDistribucion = 1.5;
     const soporteTinaco = 0.5;
     const desperdicio = 1.05;
     const cantidadFiltro = 1;
     const reductor = 1;
-    const litros = 2000;
 
-    const capacidadTanque = obtenerTinaco(litros)
+    const litros = obtenerLitros(resultados.zona, resultados.areaCaptacion);
+    const capacidadTanque = obtenerTinaco(litros);
     const cantidadTuberia = calcularCantidadTuberia(resultados.niveles, capacidadTanque, metrosDistribucion, soporteTinaco, desperdicio);
 
-    document.getElementById("precipSem").innerText = `${precipSem} mm`;
+    document.getElementById("litros").innerText = `${litros} L`;
     document.getElementById("capacidadTanque").innerText = `${capacidadTanque} L`;
     document.getElementById("materialTanque").innerText = obtenerMaterialRecomendado(capacidadTanque);
     document.getElementById("precioTanque").innerText = obtenerPrecioTanque(capacidadTanque);
