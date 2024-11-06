@@ -20,7 +20,7 @@ function obtenerPrecioTanque(capacidad) {
     else if (capacidad === 5000) precio = 13000;
     else return "Precio a consultar";
     
-    return precio.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
+    return precio;
 }
 
 // Función para obtener la tubería recomendada según capacidad del tanque
@@ -46,7 +46,7 @@ function obtenerPrecioTuberia(capacidad, cantidad) {
     else return "Precio no disponible";
     
     const total = precioPorUnidad * cantidad;
-    return total.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
+    return total.toFixed(2); // Devolver el total con dos decimales
 }
 
 // Función para obtener la altura del tinaco según la capacidad
@@ -178,12 +178,12 @@ if (resultados) {
     const precioFiltrosNum = parseFloat(precioFiltros) || 0;
     const precioReductorNum = parseFloat(precioReductor) || 0;
 
-    const total = precioCodosNum + precioTanqueNum + precioTuberiaNum + precioFiltrosNum + precioReductorNum;
+    const total = precioCodosNum + precioFiltrosNum + precioReductorNum + precioTanqueNum + precioTuberiaNum;
 
     document.getElementById("litros").innerText = `${litros} L`;
     document.getElementById("capacidadTanque").innerText = `${capacidadTanque} L`;
     document.getElementById("materialTanque").innerText = obtenerMaterialRecomendado(capacidadTanque);
-    document.getElementById("precioTanque").innerText = obtenerPrecioTanque(capacidadTanque);
+    document.getElementById("precioTanque").innerText = `$${precioTanque} `
     document.getElementById("tuberiaRecomendada").innerText = obtenerTuberiaRecomendada(capacidadTanque);
     document.getElementById("cantidadTuberia").innerText = cantidadTuberia !== null ? `${cantidadTuberia} m` : "Cantidad no disponible";
     document.getElementById("cantidadFiltro").innerText = `${cantidadFiltro} `;
@@ -193,7 +193,7 @@ if (resultados) {
     document.getElementById("total").innerText = `$${total} `;
 
     if (cantidadTuberia !== null) {
-        document.getElementById("precioTuberia").innerText = obtenerPrecioTuberia(capacidadTanque, cantidadTuberia);
+        document.getElementById("precioTuberia").innerText = `$${precioTuberia} `
     } else {
         document.getElementById("precioTuberia").innerText = "Cantidad de tubería no disponible";
     }
