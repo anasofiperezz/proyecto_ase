@@ -111,6 +111,43 @@ function obtenerLitros(zona, areaCaptacion) {
     return parseFloat(litrosSemanales.toFixed(2));
 }
 
+// Función para obtener el precio de los codos
+function obtenerPrecioCodos(capacidad, cantidad) {
+    capacidad = Math.round(capacidad);
+    let precioPorUnidad;
+    if (capacidad === 500) precioPorUnidad = 10;
+    else if (capacidad === 750) precioPorUnidad = 15;
+    else if (capacidad === 1100 || capacidad === 1200) precioPorUnidad = 22;
+    else if (capacidad === 2500) precioPorUnidad = 52; 
+    else if (capacidad === 5000) precioPorUnidad = 74;
+    else return "Precio no disponible";
+    
+    const total = precioPorUnidad * cantidad;
+    return total.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
+}
+
+// Función para obtener el precio de los filtros
+function obtenerPrecioFiltros(capacidad) {
+    capacidad = Math.round(capacidad);
+    if (capacidad === 500) return 279;
+    else if (capacidad === 750) return 309;
+    else if (capacidad === 1100 || capacidad === 1200) return 349;
+    else if (capacidad === 2500) return 519; 
+    else if (capacidad === 5000) return 699;
+    else return "Precio no disponible";
+}
+
+// Función para obtener el precio del reductor
+function obtenerPrecioReductor(capacidad) {
+    capacidad = Math.round(capacidad);
+    if (capacidad === 500) return 50;
+    else if (capacidad === 750) return 70;
+    else if (capacidad === 1100 || capacidad === 1200) return 100;
+    else if (capacidad === 2500) return 150; 
+    else if (capacidad === 5000) return 200;
+    else return "Precio no disponible";
+}
+
 // Obtener los resultados almacenados en localStorage
 const resultados = JSON.parse(localStorage.getItem("resultados"));
 
@@ -129,6 +166,19 @@ if (resultados) {
     const litros = obtenerLitros(resultados.zona, resultados.areaCaptacion);
     const capacidadTanque = obtenerTinaco(litros);
     const cantidadTuberia = calcularCantidadTuberia(resultados.niveles, capacidadTanque, metrosDistribucion, soporteTinaco, desperdicio);
+    const precioCodos = parseFloat(obtenerPrecioCodos(capacidadTanque, obtenerCodos(resultados.niveles)).replace(/[^0-9.-]+/g,"")) || 0;
+    const precioFiltros = obtenerPrecioFiltros(capacidadTanque);
+    const precioReductor = obtenerPrecioReductor(capacidadTanque);
+    const precioTanque = obtenerPrecioTanque(capacidadTanque);
+    const precioTuberia = obtenerPrecioTuberia(capacidadTanque, cantidadTuberia);
+    
+    const precioCodosNum = parseFloat(precioCodos) || 0;
+    const precioTanqueNum = parseFloat(precioTanque) || 0;
+    const precioTuberiaNum = parseFloat(precioTuberia) || 0;
+    const precioFiltrosNum = parseFloat(precioFiltros) || 0;
+    const precioReductorNum = parseFloat(precioReductor) || 0;
+
+    const total = precioCodosNum + precioTanqueNum + precioTuberiaNum + precioFiltrosNum + precioReductorNum;
 
     document.getElementById("litros").innerText = `${litros} L`;
     document.getElementById("capacidadTanque").innerText = `${capacidadTanque} L`;
@@ -139,6 +189,8 @@ if (resultados) {
     document.getElementById("cantidadFiltro").innerText = `${cantidadFiltro} `;
     document.getElementById("reductor").innerText = `${reductor} `;
     document.getElementById("obtenerCodos").innerText = obtenerCodos(resultados.niveles);
+    document.getElementById("obtenerCodos").innerText = obtenerCodos(resultados.niveles);
+    document.getElementById("total").innerText = `$${total} `;
 
     if (cantidadTuberia !== null) {
         document.getElementById("precioTuberia").innerText = obtenerPrecioTuberia(capacidadTanque, cantidadTuberia);
